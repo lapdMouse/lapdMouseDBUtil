@@ -176,7 +176,7 @@ def getStatus(item):
       localSize = os.path.getsize(realPath)
       if remoteSize!=localSize or \
         remoteModificationTime>localModificationTime:
-        status = 'required update'
+        status = 'require update'
   return status
 
 def summarizeItems(items):
@@ -190,7 +190,7 @@ def summarizeItems(items):
   filesForDownload = [i for i in remoteFiles if i['status']=='require download']
   summaryString += ', require download='+str(len(filesForDownload))
   if len(filesForDownload)>0: summaryString+='('+humanReadableSize(sum(i['size'] for i in filesForDownload))+')'
-  filesOutOfDate = [i for i in remoteFiles if i['status']=='required']
+  filesOutOfDate = [i for i in remoteFiles if i['status']=='require update']
   summaryString += ', require update='+str(len(filesOutOfDate))
   if len(filesOutOfDate)>0: summaryString+='('+humanReadableSize(sum(i['size'] for i in filesOutOfDate))+')'
   print(summaryString)
