@@ -51,10 +51,10 @@ $ python lapdMouseDBUtil.py
 DB access status: available
 DB query: root=., depth=0, pattern=*
 m01 -> ./m01 (folder)
-m01 -> ./m01 (folder)
+m02 -> ./m02 (folder)
 m03 -> ./m03 (folder)
 ...
-Matching files/folders: total=16(0.0 B), downloaded=0, require download=16(0.0 B), require update=0
+Matching files/folders: total=35(0.0 B), downloaded=0, require download=35(0.0 B), require update=0
 ```
 
 It provides in addition the following information:
@@ -109,20 +109,26 @@ dataset `m01`:
 $ python lapdMouseDBUtil.py --pattern=m01/*Aerosol*.mha
 DB access status: available
 DB query: root=m01, depth=0, pattern=*Aerosol*.mha
-m01/m01_Aerosol.mha -> ./m01/m01_Aerosol.mha (require download; 28.9 GB)
-m01/m01_AerosolSub2.mha -> ./m01/m01_AerosolSub2.mha (require download; 3.6 GB)
-m01/m01_AerosolSub4.mha -> ./m01/m01_AerosolSub4.mha (require download; 463.1 MB)
-Matching files/folders: total=3(33.0 GB), downloaded=0, require download=3(33.0 GB), require update=0
+m01/m01_Aerosol.mha -> ./m01/m01_Aerosol.mha (require download; 25.4 GB)
+m01/m01_AerosolDeconv.mha -> ./m01/m01_AerosolDeconv.mha (require download; 25.4 GB)
+m01/m01_AerosolDeconvSub2.mha -> ./m01/m01_AerosolDeconvSub2.mha (require download; 3.2 GB)
+m01/m01_AerosolDeconvSub4.mha -> ./m01/m01_AerosolDeconvSub4.mha (require download; 405.2 MB)
+m01/m01_AerosolNormalized.mha -> ./m01/m01_AerosolNormalized.mha (require download; 25.4 GB)
+m01/m01_AerosolNormalizedSub2.mha -> ./m01/m01_AerosolNormalizedSub2.mha (require download; 3.2 GB)
+m01/m01_AerosolNormalizedSub4.mha -> ./m01/m01_AerosolNormalizedSub4.mha (require download; 405.2 MB)
+m01/m01_AerosolSub2.mha -> ./m01/m01_AerosolSub2.mha (require download; 3.2 GB)
+m01/m01_AerosolSub4.mha -> ./m01/m01_AerosolSub4.mha (require download; 405.2 MB)
+Matching files/folders: total=9(86.8 GB), downloaded=0, require download=9(86.8 GB), require update=0
 ```
 
 Common search patterns to specify interesting files include:
 
   * all datasets: `python lapdMouseDBUtil.py --pattern=*`
-  * all files for a specific dataset (`m01`): `python lapdMouseDBUtil.py --pattern=m01/*`
-  * all aersosol deposition images for a specific dataset (`m01`): `python lapdMouseDBUtil.py --pattern=m01/*Aerosol*.mha`
+  * all top level files for a specific dataset (`m01`): `python lapdMouseDBUtil.py --pattern=m01/*`
+  * all aerosol deposition images for a specific dataset (`m01`): `python lapdMouseDBUtil.py --pattern=m01/*Aerosol*.mha`
+  * smallest aerosol deposition images for a specific dataset ('m01'): `python lapdMouseDBUtil.py --pattern=m01/*Aerosol*Sub4.mha`
   * all .vtk meshes for a specific dataset (`m01`): `python lapdMouseDBUtil.py --pattern=m01/*.vtk`
-  * raw cryomicrotome meta data for a specific dataset (`m01`): `python lapdMouseDBUtil.py --pattern=m01/RawCryomicrotomeData/*`
-  * raw cryomicrotome image data for a specific dataset (`m01`): `python lapdMouseDBUtil.py --pattern=m01/RawCryomicrotomeData/*/*`
+  * raw cryomicrotome image data for a specific dataset (`m01`): `python lapdMouseDBUtil.py --pattern=m01/m01_RawCryomicrotomeData/*`
   * Info.md files for **all** datasets: `python lapdMouseDBUtil.py --pattern=*/*Info.md`
 
 ### Specify local download folder
@@ -132,16 +138,16 @@ where to download the files to (`--localDir`). The default output
 directory is the current working directory.
 
 ```sh
-$ python lapdMouseDBUtil.py --pattern=m01/*Aerosol*.mha --localDir=/home/christian/data/lapdMouseDB
+$ python lapdMouseDBUtil.py --pattern=m01/*Aerosol*Sub4.mha --localDir=/home/christian/data/lapdMouseDB
 DB access status: available
-DB query: root=m01, depth=0, pattern=*Aerosol*.mha
-m01/m01_Aerosol.mha -> /home/christian/data/lapdMouseDB/m01/m01_Aerosol.mha (require download; 25.4 GB)
-m01/m01_AerosolSub2.mha -> /home/christian/data/lapdMouseDB/m01/m01_AerosolSub2.mha (require download; 3.2 GB)
+DB query: root=m01, depth=0, pattern=*Aerosol*Sub4.mha
+m01/m01_AerosolDeconvSub4.mha -> /home/christian/data/lapdMouseDB/m01/m01_AerosolDeconvSub4.mha (require download; 405.2 MB)
+m01/m01_AerosolNormalizedSub4.mha -> /home/christian/data/lapdMouseDB/m01/m01_AerosolNormalizedSub4.mha (require download; 405.2 MB)
 m01/m01_AerosolSub4.mha -> ./m01/home/christian/data/lapdMouseDB/m01/m01_AerosolSub4.mha (require download; 405.2 MB)
-Matching files/folders: total=3(28.9 GB), downloaded=0, require download=3(28.9 GB), require update=0
+Matching files/folders: total=3(1.2 GB), downloaded=0, require download=3(1.2 GB), require update=0
 ```
 
-This file selection contains 3 files with ~28.9GB of data listed as `require download`.
+This file selection contains 3 files with ~1.2GB of data listed as `require download`.
 
 ### Download data (or update data)
 
@@ -149,9 +155,9 @@ Once the file selection has been completed and a local output folder specified,
 trigger the actual download (`--action=download`):
 
 ```sh
-$ python lapdMouseDBUtil.py --pattern=m01/*Aerosol*.mha --localDir=/home/christian/data/lapdMouseDB --operation=download
+$ python lapdMouseDBUtil.py --pattern=m01/*Aerosol[S\.]*.mha --localDir=/home/christian/data/lapdMouseDB --operation=download
 DB access status: available
-DB query: root=m01, depth=0, pattern=*Aerosol*.mha
+DB query: root=m01, depth=0, pattern=*Aerosol[S.]*.mha
 m01/m01_Aerosol.mha -> /home/christian/data/lapdMouseDB/m01/m01_Aerosol.mha (require download; 25.4 GB)
   Downloading ...[DONE] time: 02:31(mm:ss)
 m01/m01_AerosolSub2.mha -> /home/christian/data/lapdMouseDB/m01/m01_AerosolSub2.mha (require download; 3.2 GB)
