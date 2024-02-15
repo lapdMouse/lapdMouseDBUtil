@@ -2,7 +2,7 @@
 
 **lapdMouseDBUtil** is a command line tool to list, search, and download files
 from the
-[Lung anatomy + particle deposition (lapd) mouse archive](https://doi.org/10.25820/9arg-9w56).
+[Lung anatomy + particle deposition (lapd) mouse archive](https://cebs-ext.niehs.nih.gov/cahs/report/lapd/web-download-links/MzNhZGRkZGY5ZWU2OGU1ODgwYWQ4NjA2Njg0M2Q1YzMK).
 For more information about the lapdMouse project and available data visit
 <https://doi.org/10.25820/9arg-9w56>. Using **lapdMouseDBUtil**
 you can for example download all AirwayWallDeposition.vtk files for all datasets
@@ -18,14 +18,14 @@ user's system.
 
 **Prerequisite - Python**: If Python has not yet been installed on your system, go
 to <https://www.python.org/downloads>, download and install a version suitable
-for your operating system. **lapdMouseDBUtil** has been tested with Python 3.4.3
-and 2.7.6 on Windows 7, Ubuntu 16.04, and MacOS Sierra.
+for your operating system. **lapdMouseDBUtil** has been tested with Python 3.10.13.
 
-**Download lapdMouseDBUtil**: Go to <http://lapdmouse.iibi.uiowa.edu/software>,
-download **lapdMouseDBUtil** and unzip if necessary.
+**Download lapdMouseDBUtil** from github:
+<https://github.com/lapdMouse/lapdMouseDBUtil>. Clone the archive or
+download the [zip file](https://github.com/lapdMouse/lapdMouseDBUtil/archive/refs/heads/master.zip).
 
-**Test**: Go to the folder containing lapdMouseDBUtil.py and call
-`python lapdMouseDBUtil.py`
+**Test**: Unzip the file if necessary. Go to the folder containing lapdMouseDBUtil.py and call
+`python3 lapdMouseDBUtil.py`
 
 ## Step-by-step usage guide
 
@@ -47,7 +47,7 @@ Calling `lapdMouseDBUtil.py` without any parameters lists all datasets in the
 lapdMouse data archive.
 
 ```sh
-$ python lapdMouseDBUtil.py
+$ python3 lapdMouseDBUtil.py
 DB access status: available
 DB query: root=., depth=0, pattern=*
 m01 -> ./m01 (folder)
@@ -80,7 +80,7 @@ It provides in addition the following information:
 To obtain a list of options supported by `lapdMouseDBUtil.py`, call
 
 ```sh
-$ python lapdMouseDBUtil.py --help
+$ python3 lapdMouseDBUtil.py --help
 usage: lapdMouseDBUtil.py [-h] [-p [PATTERN]] [-l LOCALDIR]
                          [-a {list,download,update,none}]
 
@@ -106,7 +106,7 @@ are interested in. E.g. list all aerosol deposition images `Aerosol*.mha` for
 dataset `m01`:
 
 ```
-$ python lapdMouseDBUtil.py --pattern=m01/*Aerosol*.mha
+$ python3 lapdMouseDBUtil.py --pattern=m01/*Aerosol*.mha
 DB access status: available
 DB query: root=m01, depth=0, pattern=*Aerosol*.mha
 m01/m01_Aerosol.mha -> ./m01/m01_Aerosol.mha (require download; 25.4 GB)
@@ -123,13 +123,13 @@ Matching files/folders: total=9(86.8 GB), downloaded=0, require download=9(86.8 
 
 Common search patterns to specify interesting files include:
 
-  * all datasets: `python lapdMouseDBUtil.py --pattern=*`
-  * all top level files for a specific dataset (`m01`): `python lapdMouseDBUtil.py --pattern=m01/*`
-  * all aerosol deposition images for a specific dataset (`m01`): `python lapdMouseDBUtil.py --pattern=m01/*Aerosol*.mha`
-  * smallest aerosol deposition images for a specific dataset ('m01'): `python lapdMouseDBUtil.py --pattern=m01/*Aerosol*Sub4.mha`
-  * all .vtk meshes for a specific dataset (`m01`): `python lapdMouseDBUtil.py --pattern=m01/*.vtk`
-  * raw cryomicrotome image data for a specific dataset (`m01`): `python lapdMouseDBUtil.py --pattern=m01/m01_RawCryomicrotomeData/*`
-  * Info.md files for **all** datasets: `python lapdMouseDBUtil.py --pattern=*/*Info.md`
+  * all datasets: `python3 lapdMouseDBUtil.py --pattern=*`
+  * all top level files for a specific dataset (`m01`): `python3 lapdMouseDBUtil.py --pattern=m01/*`
+  * all aerosol deposition images for a specific dataset (`m01`): `python3 lapdMouseDBUtil.py --pattern=m01/*Aerosol*.mha`
+  * smallest aerosol deposition images for a specific dataset ('m01'): `python3 lapdMouseDBUtil.py --pattern=m01/*Aerosol*Sub4.mha`
+  * all .vtk meshes for a specific dataset (`m01`): `python3 lapdMouseDBUtil.py --pattern=m01/*.vtk`
+  * raw cryomicrotome image data for a specific dataset (`m01`): `python3 lapdMouseDBUtil.py --pattern=m01/m01_RawCryomicrotomeData/*`
+  * Info.md files for **all** datasets: `python3 lapdMouseDBUtil.py --pattern=*/*Info.md`
 
 ### Specify local download folder
 
@@ -138,7 +138,7 @@ where to download the files to (`--localDir`). The default output
 directory is the current working directory.
 
 ```sh
-$ python lapdMouseDBUtil.py --pattern=m01/*Aerosol*Sub4.mha --localDir=/home/christian/data/lapdMouseDB
+$ python3 lapdMouseDBUtil.py --pattern=m01/*Aerosol*Sub4.mha --localDir=/home/christian/data/lapdMouseDB
 DB access status: available
 DB query: root=m01, depth=0, pattern=*Aerosol*Sub4.mha
 m01/m01_AerosolDeconvSub4.mha -> /home/christian/data/lapdMouseDB/m01/m01_AerosolDeconvSub4.mha (require download; 405.2 MB)
@@ -155,7 +155,7 @@ Once the file selection has been completed and a local output folder specified,
 trigger the actual download (`--action=download`):
 
 ```sh
-$ python lapdMouseDBUtil.py --pattern=m01/*Aerosol[S\.]*.mha --localDir=/home/christian/data/lapdMouseDB --operation=download
+$ python3 lapdMouseDBUtil.py --pattern=m01/*Aerosol[S\.]*.mha --localDir=/home/christian/data/lapdMouseDB --operation=download
 DB access status: available
 DB query: root=m01, depth=0, pattern=*Aerosol[S.]*.mha
 m01/m01_Aerosol.mha -> /home/christian/data/lapdMouseDB/m01/m01_Aerosol.mha (require download; 25.4 GB)
@@ -178,7 +178,7 @@ files with their updated download status (`downloaded` instead of `require
 download`):
 
 ```sh
-$ python lapdMouseDBUtil.py --pattern=m01/*Aerosol*.mha --localDir=/home/christian/data/lapdMouseDB
+$ python3 lapdMouseDBUtil.py --pattern=m01/*Aerosol*.mha --localDir=/home/christian/data/lapdMouseDB
 DB access status: available
 DB query: root=m01, depth=0, pattern=*Aerosol*.mha
 m01/m01_Aerosol.mha -> /home/christian/data/lapdMouseDB/m01/m01_Aerosol.mha (downloaded; 25.4 GB)
