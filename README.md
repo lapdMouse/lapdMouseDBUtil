@@ -1,14 +1,16 @@
 # lapdMouseDBUtil
 
-**lapdMouseDBUtil** is a command line tool to list, search, and download files
-from the
-[Lung anatomy + particle deposition (lapd) mouse archive](https://cebs-ext.niehs.nih.gov/cahs/report/lapd/web-download-links/).
-For more information about the lapdMouse project and available data visit
-<https://doi.org/10.25820/9arg-9w56>. Using **lapdMouseDBUtil**
-you can for example download all AirwayWallDeposition.vtk files for all datasets
-in the data archive using one command:
+**lapdMouseDBUtil** is a command line tool to list, search, and download
+files from the [Lung anatomy + particle deposition (lapd) mouse
+archive](https://lapdmouse.iibi.uiowa.edu).  For more information about
+the lapdMouse project and available data visit
+<https://doi.org/10.25820/9arg-9w56>.
 
-`python lapdMouseDBUtil.py --pattern=*/*AirwayWallDeposition.vtk --action=download`
+Using **lapdMouseDBUtil** you can for example download all
+AirwayWallDeposition.vtk files for all datasets in the data archive
+using one command:
+
+`python3 lapdMouseDBUtil.py --pattern=*/*AirwayWallDeposition.vtk --action=download`
 
 ## Getting started
 
@@ -32,12 +34,13 @@ download the [zip file](https://github.com/lapdMouse/lapdMouseDBUtil/archive/ref
 Using **lapdMouseDBUtil** to obtain files from the lapdMouse data archive involves
 the following steps:
 
-  - [List datasets](#listdatasets)
-  - [List program options](#listprogramoptions)
-  - [Select files by specifying file search pattern](#selectfilesbyspecifyingfilesearchpattern)
-  - [Specify local download folder](#specifylocaldownloadfolder)
-  - [Download data (or update data)](#downloaddataorupdatedata)
-  - [Verify download status](#verifydownloadstatus)
+  - [List datasets](#list-datasets)
+  - [List program options](#list-program-options)
+  - [Select files by specifying file search
+    pattern](#select-files-by-specifying-file-search-pattern)
+  - [Specify local download folder](#specify-local-download-folder)
+  - [Download data (or update data)](#download-data-or-update-data)
+  - [Verify download status](#verify-download-status)
 
 All steps will be explained in detail below.
 
@@ -199,5 +202,6 @@ This work was supported in part by NIH project R01ES023863.
 
 For support and further information please visit the
 "Lung anatomy + particle deposition (lapd) mouse archive"
-at <https://doi.org/10.25820/9arg-9w56>.
+at <https://doi.org/10.25820/9arg-9w56> or our [data
+repository](https://lapdmouse.iibi.uiowa.edu)
 
