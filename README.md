@@ -2,7 +2,7 @@
 
 **lapdMouseDBUtil** is a command line tool to list, search, and download files
 from the
-[Lung anatomy + particle deposition (lapd) mouse archive](https://cebs-ext.niehs.nih.gov/cahs/report/lapd/web-download-links/MzNhZGRkZGY5ZWU2OGU1ODgwYWQ4NjA2Njg0M2Q1YzMK).
+[Lung anatomy + particle deposition (lapd) mouse archive](https://cebs-ext.niehs.nih.gov/cahs/report/lapd/web-download-links/).
 For more information about the lapdMouse project and available data visit
 <https://doi.org/10.25820/9arg-9w56>. Using **lapdMouseDBUtil**
 you can for example download all AirwayWallDeposition.vtk files for all datasets
