@@ -189,7 +189,7 @@ def testDBAccess(db):
 
 if __name__=="__main__":
   parser = argparse.ArgumentParser(description='lapdMouse database access tool to list, search, and download files.',\
-    epilog='lapdMouse project webpage including documentation and support:\n<https://lapdmouse.iibi.uiowa.edu>\nThis work was supported in part by NIH project R01ES023863.',
+    epilog='lapdMouse project webpage including documentation and support:\n<https://cebs-ext.niehs.nih.gov/cahs/report/lapd/web-download-links/>\nThis work was supported in part by NIH project R01ES023863.',
     formatter_class=argparse.RawTextHelpFormatter)
   parser.add_argument('-p','--pattern', nargs='?', default='*', help='file pattern', type=str)
   parser.add_argument('-l','--localDir', default='.', help='local base directory for download')

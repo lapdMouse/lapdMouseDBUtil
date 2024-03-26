@@ -2,8 +2,8 @@
 
 **lapdMouseDBUtil** is a command line tool to list, search, and download
 files from the [Lung anatomy + particle deposition (lapd) mouse
-archive](https://lapdmouse.iibi.uiowa.edu).  For more information about
-the lapdMouse project and available data visit
+archive](https://cebs-ext.niehs.nih.gov/cahs/report/lapd/web-download-links)
+For more information about the lapdMouse project visit
 <https://doi.org/10.25820/9arg-9w56>.
 
 Using **lapdMouseDBUtil** you can for example download all
@@ -99,7 +99,7 @@ optional arguments:
                         action to perform
 
 lapdMouse project webpage including documentation and support:
-<https://lapdmouse.iibi.uiowa.edu>
+<https://cebs-ext.niehs.nih.gov/cahs/report/lapd/web-download-links/>
 This work was supported by NIH project R01ES023863.
 ```
 
@@ -200,8 +200,7 @@ This work was supported in part by NIH project R01ES023863.
 
 ## Support
 
-For support and further information please visit the
+For further information please visit the
 "Lung anatomy + particle deposition (lapd) mouse archive"
 at <https://doi.org/10.25820/9arg-9w56> or our [data
-repository](https://lapdmouse.iibi.uiowa.edu)
-
+repository](https://cebs-ext.niehs.nih.gov/cahs/report/lapd/web-download-links/)
