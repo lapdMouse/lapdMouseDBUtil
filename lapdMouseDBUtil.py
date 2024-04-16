@@ -65,13 +65,35 @@ class lapdMouseDBUtil():
 
   def _downloadURLStreaming(self,response,destination):
     if response.getcode() == 200:
+      totalSize = int(response.getheader('Content-Length'))
+      currSize = 0 
       destinationFile = open(destination, "wb")
       bufferSize = 1024*1024
       while True:
+        self._printProgress(currSize, totalSize, bufferSize)
         buffer = response.read(bufferSize)
-        if not buffer: break
+        currSize = currSize + bufferSize
+        if not buffer:
+           break
         destinationFile.write(buffer)
       destinationFile.close()
+
+  def _printProgress(self, currSize, totalSize, bufferSize):
+    if bufferSize > totalSize:
+       pass
+    currPct = int(currSize*100/totalSize)
+    lastPct = int((currSize - bufferSize)*100/totalSize)
+    if currSize == 0:
+      print('0%', end='', flush=True)
+    elif currPct >= 100:
+       print('.100%', flush=True)
+    elif currPct > lastPct:
+      if currPct - lastPct > 10:
+         print(f'.{currPct}%', end='', flush=True)
+      elif currPct % 10 == 0:
+        print(f'{currPct}%', end='', flush=True)
+      elif currPct % 2 == 0:
+        print('.', end='', flush=True)
 
   def _listFolderRemote(self,dirname,depth=0):
     # Read file with file names and metadata
