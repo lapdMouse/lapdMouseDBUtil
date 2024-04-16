@@ -79,8 +79,8 @@ class lapdMouseDBUtil():
       destinationFile.close()
 
   def _printProgress(self, currSize, totalSize, bufferSize):
-    if bufferSize > totalSize:
-       pass
+    if 2*bufferSize > totalSize:
+       return
     currPct = int(currSize*100/totalSize)
     lastPct = int((currSize - bufferSize)*100/totalSize)
     if currSize == 0:
