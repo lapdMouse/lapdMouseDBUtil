@@ -13,7 +13,7 @@ __date__ = "2024/01/01"
 __license__ = "3-clause BSD license"
 __version__ = "1.1.0"
 
-import argparse, json, os, datetime, fnmatch, time, sys, urllib.request, urllib.error
+import argparse, json, os, datetime, fnmatch, time, sys, urllib.request, urllib.error, ssl
 MIN_PYTHON = (3, 6)
 if (sys.version_info < MIN_PYTHON):
    sys.exit("Python %s.%s or later is required.\n" % MIN_PYTHON)
@@ -26,7 +26,6 @@ class lapdMouseDBUtil():
     self.gdriveURL = lapdMouseDatabaseUrl
 
   def _canAccess(self):
-    import ssl
     # Create a secure SSL context
     ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
     ctx.options |= 0x4  # OP_LEGACY_SERVER_CONNECT
@@ -58,9 +57,25 @@ class lapdMouseDBUtil():
     self._downloadFileFromRemote(src, dst)
 
   def _downloadFileFromRemote(self, src, destination):
+    # Create a secure SSL context
+    ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
+    ctx.options |= 0x4  # OP_LEGACY_SERVER_CONNECT
+ 
     requestUrl = self.gdriveURL + src
-    request = urllib.request.Request(requestUrl)
-    response = urllib.request.urlopen(request)
+    try:
+       request = urllib.request.Request(requestUrl)
+       response = urllib.request.urlopen(request, context=ctx)
+    except urllib.error.HTTPError as e:
+      print('The server couldn\'t fulfill the request.')
+      print('Error code: ', e.code)
+      return False
+    except urllib.error.URLError as e:
+      print('We failed to reach a server.')
+      print('Reason: ', e.reason)
+      return False
+    except:
+      print("Unexpected error:", sys.exc_info()[0])
+      return False
     self._downloadURLStreaming(response, destination)
 
   def _downloadURLStreaming(self,response,destination):
@@ -247,7 +262,7 @@ if __name__=="__main__":
   # determine file status and print summary
   for i in matchingItems:
     i['remoteName'] = i['name'] # if len(root)==0 else root+i['name']
-    i['localName'] = os.path.join(localBaseDir, i['remoteName'])
+    i['localName'] = os.path.normpath(os.path.join(localBaseDir, i['remoteName']))
     i['status'] = getStatus(i)
   
   # apply action
